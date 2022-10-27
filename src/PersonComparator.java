@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Comparator;
 
 public class PersonComparator<P extends Person> implements Comparator<P> {
     int maxSize;
