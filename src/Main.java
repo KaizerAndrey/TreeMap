@@ -10,10 +10,29 @@ public class Main {
         person.add(new Person("Ilya", "Muromets eldest son", 45));
         person.add(new Person("Dobrynya", "Nikitich", 28));
 
-        Collections.sort(person, new PersonComparator<Person>(5));
+        Comparator <Person> personComparator = (Person o1, Person o2) -> {
+
+            TreeSet<String> text = new TreeSet<>(List.of(o1.getSurname().split("\\P{IsAlphabetic}+")));
+            TreeSet<String> text1 = new TreeSet<>(List.of(o2.getSurname().split("\\P{IsAlphabetic}+")));
+
+            if (text.size() > text1.size()) {
+                return -1;
+            } else if (text.size() < text1.size()) {
+                return 1;
+            }
+            if (o1.getAge() > o2.getAge()) {
+                return -1;
+            } else if (o1.getAge() < o2.getAge()) {
+                return 1;
+            }
+            return 0;
+        };
+
+
+        Collections.sort(person,personComparator);
         System.out.println(person);
 
-        Collections.sort(person, new PersonComparator<Person>(1));
+        Collections.sort(person, personComparator);
         System.out.println(person);
     }
 }
